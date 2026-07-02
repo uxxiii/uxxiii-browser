@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist_installer/
+release/
+website/downloads/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.local
