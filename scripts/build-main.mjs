@@ -10,7 +10,7 @@ async function build() {
     bundle: true,
     platform: 'node',
     format: 'cjs',
-    external: ['electron'],
+    external: ['electron', 'electron-updater'],
     sourcemap: true,
     tsconfig: path.join(root, 'tsconfig.node.json'),
     alias: {
