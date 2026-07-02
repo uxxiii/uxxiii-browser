@@ -78,13 +78,18 @@
               }
             }
           } catch {
-            // ignore API failures and fall back to static URL if available
+            // ignore API failures and fall back to other URLs
           }
         }
 
-        if (d.windows && !win.getAttribute('href')) {
-          win.setAttribute('href', d.windows);
-          win.setAttribute('download', d.windows.split('/').pop());
+        if (!win.getAttribute('href')) {
+          if (d.windows) {
+            win.setAttribute('href', d.windows);
+            win.setAttribute('download', d.windows.split('/').pop());
+          } else if (d.releases) {
+            win.setAttribute('href', d.releases);
+            win.removeAttribute('download');
+          }
         }
 
         if (d.sha256) sha.textContent = d.sha256;
