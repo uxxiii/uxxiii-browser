@@ -27,6 +27,17 @@ jobs:
       - name: Show `website` files
         run: ls -la website || echo "website directory not found"
 
+      - name: Copy logo into website
+        run: |
+          LOG_SRC="logo/logo without bg.png"
+          LOG_DST="website/logo-without-bg.png"
+          if [ -f "$LOG_SRC" ]; then
+            echo "Copying logo to website folder"
+            cp "$LOG_SRC" "$LOG_DST"
+          else
+            echo "No logo file found at $LOG_SRC"
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
