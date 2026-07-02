@@ -28,11 +28,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Debug: list website files
-        run: |
-          echo "Workspace: $GITHUB_WORKSPACE"
-          echo "Website folder listing:"
-          du -sh website || true
-          ls -laR website || true
+        run: echo "(skipping detailed website listing)"
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
