@@ -34,7 +34,8 @@ jobs:
           npx electron-builder --win portable
 
       - name: Debug: show packaged artifacts
-        run: echo "(skipping detailed Windows debug listing)"
+        run: |
+          echo "(skipping detailed Windows debug listing)"
 
       - name: Create GitHub Release and upload artifacts
         uses: softprops/action-gh-release@v1
