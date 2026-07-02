@@ -34,13 +34,7 @@ jobs:
           npx electron-builder --win portable
 
       - name: Debug: show packaged artifacts
-        run: |
-          echo "Dist installer contents:"
-          if (Test-Path dist_installer) {
-            Get-ChildItem -Recurse dist_installer | Sort-Object Length -Descending | Select-Object FullName, @{Name='MB';Expression={[math]::Round($_.Length/1MB,2)}} | Format-Table -AutoSize
-          } else {
-            echo "dist_installer not found"
-          }
+        run: echo "(skipping detailed Windows debug listing)"
 
       - name: Create GitHub Release and upload artifacts
         uses: softprops/action-gh-release@v1
