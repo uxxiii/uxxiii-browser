@@ -65,14 +65,35 @@
         const sha = document.getElementById('sha256');
         const rel = document.getElementById('releasesLink');
 
+        function applyDownloadLink(url, label, filename) {
+          win.setAttribute('href', url);
+          win.setAttribute('target', '_blank');
+          win.setAttribute('rel', 'noopener noreferrer');
+          if (filename) {
+            win.setAttribute('download', filename);
+          } else {
+            win.removeAttribute('download');
+          }
+          win.textContent = label;
+
+          win.onclick = (event) => {
+            if (!url) return;
+            event.preventDefault();
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.target = '_blank';
+            anchor.rel = 'noopener noreferrer';
+            if (filename) anchor.download = filename;
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+          };
+        }
+
         if (d.windows) {
-          win.setAttribute('href', d.windows);
-          win.setAttribute('download', d.windows.split('/').pop());
-          win.textContent = 'Download for Windows';
+          applyDownloadLink(d.windows, 'Download for Windows', d.windows.split('/').pop());
         } else if (d.releases) {
-          win.setAttribute('href', d.releases);
-          win.removeAttribute('download');
-          win.textContent = 'Open releases';
+          applyDownloadLink(d.releases, 'Open releases');
         }
 
         if (d.sha256) sha.textContent = d.sha256;
