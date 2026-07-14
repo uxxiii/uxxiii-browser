@@ -32,10 +32,10 @@ jobs:
         run: npm run build
 
       - name: Package (Windows NSIS)
-        run: npx electron-builder --win nsis
+        run: npx electron-builder --win nsis --publish never
 
       - name: Package (Windows portable)
-        run: npx electron-builder --win portable
+        run: npx electron-builder --win portable --publish never
 
       - name: Create GitHub Release and upload artifacts
         uses: softprops/action-gh-release@v1
