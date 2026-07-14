@@ -66,15 +66,21 @@
         const rel = document.getElementById('releasesLink');
 
         if (d.repo) {
-          const apiUrl = `https://api.github.com/repos/${d.repo}/releases/latest`;
+          const apiUrl = `https://api.github.com/repos/${d.repo}/releases?per_page=5`;
           try {
-            const latest = await fetch(apiUrl);
-            if (latest.ok) {
-              const release = await latest.json();
-              const asset = (release.assets || []).find((a) => a.name.endsWith('.exe'));
+            const releasesRes = await fetch(apiUrl, {
+              headers: {
+                Accept: 'application/vnd.github+json',
+              },
+            });
+            if (releasesRes.ok) {
+              const releases = await releasesRes.json();
+              const release = Array.isArray(releases) ? releases.find((r) => (r.assets || []).some((a) => a.name.toLowerCase().endsWith('.exe'))) : null;
+              const asset = release ? (release.assets || []).find((a) => a.name.toLowerCase().endsWith('.exe')) : null;
               if (asset) {
                 win.setAttribute('href', asset.browser_download_url);
                 win.setAttribute('download', asset.name);
+                win.textContent = `Download ${asset.name}`;
               }
             }
           } catch {
@@ -86,9 +92,11 @@
           if (d.windows) {
             win.setAttribute('href', d.windows);
             win.setAttribute('download', d.windows.split('/').pop());
+            win.textContent = 'Download for Windows';
           } else if (d.releases) {
             win.setAttribute('href', d.releases);
             win.removeAttribute('download');
+            win.textContent = 'Open releases';
           }
         }
 
