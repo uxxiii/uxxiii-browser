@@ -1,5 +1,6 @@
 {
   "releases": "https://github.com/uxxiii/uxxxiii-browser/releases",
   "repo": "uxxiii/uxxxiii-browser",
+  "windows": "https://github.com/uxxiii/uxxiii-browser/releases/download/v1.0.7/uxxxiii-browser.Setup.1.0.0.exe",
   "sha256": "Available after release upload"
 }
