@@ -18,7 +18,6 @@
           </div>
         </div>
 
-
         <p class="tagline">A refined Windows browser for focused work, private browsing, and a calm digital experience.</p>
 
         <div class="btn-grid">
@@ -56,15 +55,13 @@
     </footer>
   </main>
 
-
-  <div id=\"downloadToast\" class=\"download-toast\" role=\"status\" aria-live=\"polite\" data-testid=\"download-toast\">
-    <span class=\"dot\" aria-hidden=\"true\"></span>
-    <span class=\"msg\">
+  <div id="downloadToast" class="download-toast" role="status" aria-live="polite" data-testid="download-toast">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="msg">
       <strong>Downloading…</strong>
       <span>Check your downloads folder in a moment.</span>
     </span>
   </div>
-  
 
   <script>
     const toastEl = document.getElementById('downloadToast');
@@ -79,7 +76,7 @@
     // Attach toast trigger to the static button in case downloads.json fails to load
     const staticWinBtn = document.getElementById('windowsBtn');
     if (staticWinBtn) staticWinBtn.addEventListener('click', showDownloadToast);
-    
+
     async function loadDownloads() {
       try {
         const res = await fetch('./downloads.json');
