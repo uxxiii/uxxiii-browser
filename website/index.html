@@ -56,7 +56,30 @@
     </footer>
   </main>
 
+
+  <div id=\"downloadToast\" class=\"download-toast\" role=\"status\" aria-live=\"polite\" data-testid=\"download-toast\">
+    <span class=\"dot\" aria-hidden=\"true\"></span>
+    <span class=\"msg\">
+      <strong>Downloading…</strong>
+      <span>Check your downloads folder in a moment.</span>
+    </span>
+  </div>
+  
+
   <script>
+    const toastEl = document.getElementById('downloadToast');
+    let toastTimer = null;
+    function showDownloadToast() {
+      if (!toastEl) return;
+      toastEl.classList.add('visible');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('visible'), 4200);
+    }
+
+    // Attach toast trigger to the static button in case downloads.json fails to load
+    const staticWinBtn = document.getElementById('windowsBtn');
+    if (staticWinBtn) staticWinBtn.addEventListener('click', showDownloadToast);
+    
     async function loadDownloads() {
       try {
         const res = await fetch('./downloads.json');
