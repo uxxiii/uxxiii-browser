@@ -18,11 +18,12 @@
           </div>
         </div>
 
+
         <p class="tagline">A refined Windows browser for focused work, private browsing, and a calm digital experience.</p>
 
         <div class="btn-grid">
-          <a id=\"windowsBtn\" class=\"btn primary\" href=\"https://github.com/uxxiii/uxxiii-browser/releases/download/v1.0.7/uxxxiii-browser.Setup.1.0.0.exe\" download=\"uxxxiii-browser.Setup.1.0.0.exe\" data-testid=\"download-windows-btn\">Download for Windows</a>
-          <a id=\"releasesLink\" class=\"btn secondary\" href=\"https://github.com/uxxiii/uxxiii-browser/releases\" target=\"_blank\" rel=\"noopener noreferrer\" data-testid=\"view-releases-link\">View releases</a>
+          <a id="windowsBtn" class="btn primary" href="https://github.com/uxxiii/uxxiii-browser/releases/download/v1.0.7/uxxxiii-browser.Setup.1.0.0.exe" download="uxxxiii-browser.Setup.1.0.0.exe" data-testid="download-windows-btn">Download for Windows</a>
+          <a id="releasesLink" class="btn secondary" href="https://github.com/uxxiii/uxxiii-browser/releases" target="_blank" rel="noopener noreferrer" data-testid="view-releases-link">View releases</a>
         </div>
 
         <div class="feature-row">
@@ -67,8 +68,8 @@
 
         function applyDownloadLink(url, label, filename) {
           win.setAttribute('href', url);
-          win.setAttribute('target', '_blank');
-          win.setAttribute('rel', 'noopener noreferrer');
+          win.removeAttribute('target');
+          win.removeAttribute('rel');
           if (filename) {
             win.setAttribute('download', filename);
           } else {
@@ -81,8 +82,6 @@
             event.preventDefault();
             const anchor = document.createElement('a');
             anchor.href = url;
-            anchor.target = '_blank';
-            anchor.rel = 'noopener noreferrer';
             if (filename) anchor.download = filename;
             document.body.appendChild(anchor);
             anchor.click();
@@ -91,7 +90,8 @@
         }
 
         if (d.windows) {
-          applyDownloadLink(d.windows, 'Download for Windows', d.windows.split('/').pop());
+          const filename = d.windows.split('/').pop().split('?')[0];
+          applyDownloadLink(d.windows, 'Download for Windows', filename);
         } else if (d.releases) {
           applyDownloadLink(d.releases, 'Open releases');
         }
